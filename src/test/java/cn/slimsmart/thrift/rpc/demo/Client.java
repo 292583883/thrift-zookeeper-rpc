@@ -13,14 +13,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.slimsmart.thrift.rpc.ThriftServiceClientProxyFactory;
 
-//客户端调用
+/**
+ *客户端调用演示
+ */
 @SuppressWarnings("resource")
 public class Client {
 	public static void main(String[] args) {
-		//simple();
-		spring();
+		simple();
+		//spring();
 	}
 
+	/**
+	 * Spring方式实现client端的调用
+	 */
 	public static void spring() {
 		try {
 			final ApplicationContext context = new ClassPathXmlApplicationContext("spring-context-thrift-client.xml");
@@ -59,18 +64,26 @@ public class Client {
 		}
 	}
 
+	/**
+	 * 简单的Zookeeper调用实现
+	 */
 	public static void simple() {
 		try {
-			TSocket socket = new TSocket("192.168.36.215", 9001);
-			TTransport transport = new TFramedTransport(socket);
-			TProtocol protocol = new TBinaryProtocol(transport);
-			EchoSerivce.Client client = new EchoSerivce.Client(protocol);
-			transport.open();
-			System.out.println(client.echo("helloword"));
-			Thread.sleep(3000);
-			transport.close();
+			for(int i=1; i<3; i++){
+				TSocket socket = new TSocket("127.0.0.1", 9000+i);
+				TTransport transport = new TFramedTransport(socket);
+				TProtocol protocol = new TBinaryProtocol(transport);
+				EchoSerivce.Client client = new EchoSerivce.Client(protocol);
+				transport.open();
+				System.out.println(client.echo("helloword"));
+				Thread.sleep(3000);
+				transport.close();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+
+
 }

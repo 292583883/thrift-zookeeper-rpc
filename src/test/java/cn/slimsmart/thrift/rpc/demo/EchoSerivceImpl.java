@@ -2,7 +2,9 @@ package cn.slimsmart.thrift.rpc.demo;
 
 import org.apache.thrift.TException;
 
-//实现类
+/**
+ * Thrift接口定义的实现类,用于具体业务的实现
+ */
 public class EchoSerivceImpl implements EchoSerivce.Iface {
 
 	@Override
