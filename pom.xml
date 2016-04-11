@@ -1,51 +1,62 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+							 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.slimsmart.thrift.rpc</groupId>
 	<artifactId>thrift-rpc</artifactId>
 	<version>1.0.0</version>
+
+	<properties>
+		<libthrift.version>0.9.2</libthrift.version>
+		<commons-pool.version> 1.6</commons-pool.version>
+		<spring.version>4.0.9.RELEASE</spring.version>
+		<zookeeper.version>3.4.5</zookeeper.version>
+		<curator.version>2.7.1</curator.version>
+	</properties>
+	<!--引入依赖jar-->
 	<dependencies>
+		<!--thrift-->
 		<dependency>
 			<groupId>org.apache.thrift</groupId>
 			<artifactId>libthrift</artifactId>
-			<version>0.9.2</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-				</exclusion>
-			</exclusions>
+			<version>${libthrift.version}</version>
 		</dependency>
+		<!--数据库连接池commons-pool-->
 		<dependency>
 			<groupId>commons-pool</groupId>
 			<artifactId>commons-pool</artifactId>
-			<version>1.6</version>
+			<version>${commons-pool.version}</version>
 		</dependency>
+		<!--Spring相关jar包-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.0.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
-
+		<!--zookeeper-->
 		<dependency>
 			<groupId>org.apache.zookeeper</groupId>
 			<artifactId>zookeeper</artifactId>
-			<version>3.4.6</version>
+			<version>${zookeeper.version}</version>
 		</dependency>
+		<!--Netfix开源的Zookeeper client library -->
 		<dependency>
 			<groupId>org.apache.curator</groupId>
 			<artifactId>curator-recipes</artifactId>
-			<version>2.7.1</version>
+			<version>${curator.version}</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
+			<!--maven 项目编译插件-->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<encoding>UTF8</encoding>
 				</configuration>
 			</plugin>
